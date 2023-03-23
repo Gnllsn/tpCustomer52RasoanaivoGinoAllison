@@ -5,12 +5,15 @@
 package com.gnllsn.tpcustomer52rasoanaivoginoallison.jsf;
 
 import com.gnllsn.tpcustomer52rasoanaivoginoallison.ejb.CustomerManager;
+import com.gnllsn.tpcustomer52rasoanaivoginoallison.ejb.DiscountManager;
 import com.gnllsn.tpcustomer52rasoanaivoginoallison.entities.Customer;
+import com.gnllsn.tpcustomer52rasoanaivoginoallison.entities.Discount;
 import jakarta.ejb.EJB;
 import jakarta.inject.Named;
 import jakarta.enterprise.context.Dependent;
 import jakarta.faces.view.ViewScoped;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  *
@@ -28,6 +31,9 @@ public class CustomerDetailsBean implements Serializable {
 
     @EJB
     private CustomerManager customerManager;
+    
+    @EJB
+    private DiscountManager discountManager;
 
     public int getIdCustomer() {
         return idCustomer;
@@ -35,6 +41,13 @@ public class CustomerDetailsBean implements Serializable {
 
     public void setIdCustomer(int idCustomer) {
         this.idCustomer = idCustomer;
+    }
+
+    /**
+     * Retourne la liste de tous les Discount.
+     */
+    public List<Discount> getDiscounts() {
+        return discountManager.getAllDiscounts();
     }
 
     /**
