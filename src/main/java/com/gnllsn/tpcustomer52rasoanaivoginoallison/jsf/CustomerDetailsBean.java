@@ -28,6 +28,7 @@ public class CustomerDetailsBean implements Serializable {
 
     private int idCustomer;
     private Customer customer;
+    private List<Discount> discountsList ; 
 
     @EJB
     private CustomerManager customerManager;
@@ -47,7 +48,10 @@ public class CustomerDetailsBean implements Serializable {
      * Retourne la liste de tous les Discount.
      */
     public List<Discount> getDiscounts() {
-        return discountManager.getAllDiscounts();
+        if(discountsList == null ){
+            discountsList = discountManager.getAllDiscounts();
+        }
+        return discountsList ; 
     }
 
     /**
@@ -65,11 +69,13 @@ public class CustomerDetailsBean implements Serializable {
      * @return la prochaine page à afficher, celle qui affiche la liste des
      * clients.
      */
+    
+ 
     public String update() {
         // Modifie la base de données.
         // Il faut affecter à customer (sera expliqué dans le cours).
         customer = customerManager.update(customer);
-        return "customerList";
+        return "CustomerList";
     }
 
     public void loadCustomer() {
